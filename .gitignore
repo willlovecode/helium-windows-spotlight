@@ -1,0 +1,11 @@
+# Lokale Laufzeitdateien
+helium-current.jpg
+sources.csv
+.download-*/
+.helium-current-*.jpg
+
+# Lokale Tools und Editorzustand
+.projectatlas/
+.vscode/
+*.user
+*.suo
