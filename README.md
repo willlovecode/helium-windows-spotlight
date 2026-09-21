@@ -1,19 +1,19 @@
 # Helium Windows Spotlight
 
-Unabhängige Windows-Companion-Automation für [Helium](https://github.com/imputnet/helium): Beim Benutzer-Login wird das aktuell von Windows Spotlight angezeigte Desktopbild als feste JPEG-Datei aktualisiert. Helium muss dadurch nur einmal auf diese Datei zeigen.
+An independent Windows companion utility for [Helium](https://github.com/imputnet/helium). At user logon it copies the desktop image currently displayed by Windows Spotlight into a stable JPEG path that Helium can use as its custom background.
 
-Das Projekt verändert keinen Helium-Quellcode, lädt keine Bilder aus dem Internet und enthält keine persönlichen Dateien.
+The project does not modify Helium source code, download images from the Internet, or contain personal files.
 
-## Funktionsweise
+## How it works
 
-1. Der Updater liest den aktuell gesetzten Windows-Wallpaper-Pfad aus dem Benutzerprofil.
-2. Wenn Spotlight beim Login noch nicht bereit ist, wird bis zu zwei Minuten gewartet.
-3. Als Fallback wird der jüngste gültige Landschaftsbild-Eintrag aus dem lokalen Spotlight-Cache verwendet.
-4. Das Ergebnis wird atomar nach `%USERPROFILE%\Pictures\Helium Wallpapers\helium-current.jpg` geschrieben.
+1. The updater reads the wallpaper path currently set in the user's Windows profile.
+2. If Spotlight is not ready at logon, it waits for up to two minutes.
+3. As a fallback, it selects the newest valid landscape image from the local Spotlight cache.
+4. It atomically writes the result to `%USERPROFILE%\Pictures\Helium Wallpapers\helium-current.jpg`.
 
-## Einrichtung
+## Setup
 
-In PowerShell im Projektordner ausführen:
+Run the following commands from PowerShell in the project directory:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Test-HeliumWallpapers.ps1
@@ -21,22 +21,22 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Update-HeliumWallpaper
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install-HeliumWallpaperTask.ps1
 ```
 
-Danach in Helium einmalig `helium-current.jpg` als benutzerdefinierten Hintergrund auswählen. Die Datei liegt standardmäßig unter:
+Then select `helium-current.jpg` once as Helium's custom background. By default the file is stored at:
 
 `%USERPROFILE%\Pictures\Helium Wallpapers\helium-current.jpg`
 
-Der Task `Helium Windows Spotlight` startet bei jeder interaktiven Windows-Anmeldung. Er benötigt keine Administratorrechte.
+The `Helium Windows Spotlight` task runs at every interactive Windows logon. It does not require administrator privileges.
 
-## Anforderungen
+## Requirements
 
-- Windows PowerShell 5.1 oder neuer
-- Windows Spotlight als Desktop-Hintergrund
-- Helium mit Unterstützung für einen lokalen benutzerdefinierten Hintergrund
+- Windows PowerShell 5.1 or later
+- Windows Spotlight enabled as the desktop background
+- Helium with support for a local custom background
 
-## Bezug zu Helium
+## Relationship to Helium
 
-Dieses Repo ist kein offizielles Helium-Repo und kein Submodul. Für eine direkte Integration sollte zuerst ein Issue im passenden [Helium-for-Windows-Repository](https://github.com/imputnet/helium-windows) eröffnet werden. Das offizielle Helium-Projekt verweist für plattformspezifische Features auf die jeweiligen Plattform-Repositories und bittet bei nicht-trivialen Änderungen um Maintainer-Abstimmung.
+This is an unofficial companion utility and does not modify the Helium source tree. Platform-specific integration belongs in the [Helium for Windows repository](https://github.com/imputnet/helium-windows).
 
-## Lizenz
+## License
 
-Der eigenständige Code steht unter MIT. Eine spätere Übernahme in Helium müsste nach den dort geltenden GPL-3.0-Beitragsbedingungen erfolgen.
+The standalone utility is released under the MIT License.

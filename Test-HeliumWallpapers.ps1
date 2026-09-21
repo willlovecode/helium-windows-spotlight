@@ -46,7 +46,7 @@ try {
         -RegistryWallpaperPath $directPath `
         -AssetDirectory $testRoot `
         -MinimumBytes 1
-    Assert-Equal -Expected $directPath -Actual $resolvedDirect -Message 'Direkter Windows-Wallpaper-Pfad wurde nicht bevorzugt'
+    Assert-Equal -Expected $directPath -Actual $resolvedDirect -Message 'The direct Windows wallpaper path was not preferred'
 
     $assetDirectory = Join-Path $testRoot 'assets'
     New-Item -ItemType Directory -Path $assetDirectory -Force | Out-Null
@@ -63,14 +63,14 @@ try {
         -RegistryWallpaperPath (Join-Path $testRoot 'missing-wallpaper') `
         -AssetDirectory $assetDirectory `
         -MinimumBytes 1
-    Assert-Equal -Expected $landscapePath -Actual $resolvedFallback -Message 'Spotlight-Fallback findet kein Landschaftsbild'
+    Assert-Equal -Expected $landscapePath -Actual $resolvedFallback -Message 'The Spotlight fallback did not find a landscape image'
 
     $info = Get-ImageInfo -Path $resolvedFallback
-    Assert-Equal -Expected 8 -Actual $info.Width -Message 'Bildbreite wurde nicht erkannt'
-    Assert-Equal -Expected 4 -Actual $info.Height -Message 'Bildhöhe wurde nicht erkannt'
-    Assert-True -Condition $info.IsLandscape -Message 'Landschaftsbild wurde fälschlich als Hochformat erkannt'
+    Assert-Equal -Expected 8 -Actual $info.Width -Message 'The image width was not detected'
+    Assert-Equal -Expected 4 -Actual $info.Height -Message 'The image height was not detected'
+    Assert-True -Condition $info.IsLandscape -Message 'The landscape image was incorrectly detected as portrait'
 } finally {
     Remove-Item -LiteralPath $testRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-Write-Output 'Helium-Spotlight-Selbsttest: OK'
+Write-Output 'Helium Spotlight self-test: OK'

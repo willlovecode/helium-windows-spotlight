@@ -12,7 +12,7 @@ if ([string]::IsNullOrWhiteSpace($ScriptPath)) {
 }
 $ScriptPath = [IO.Path]::GetFullPath($ScriptPath)
 if (-not (Test-Path -LiteralPath $ScriptPath -PathType Leaf)) {
-    throw "Updater nicht gefunden: $ScriptPath"
+    throw "Updater not found: $ScriptPath"
 }
 
 $powershell = (Get-Command powershell.exe).Source
@@ -36,7 +36,7 @@ Register-ScheduledTask `
     -Trigger $trigger `
     -Settings $settings `
     -Principal $principal `
-    -Description 'Übernimmt das aktuelle Windows-Spotlight-Bild für Helium.' `
+    -Description 'Copies the current Windows Spotlight image for Helium.' `
     -Force | Out-Null
 
-Write-Output "Geplanter Task eingerichtet: $TaskName"
+Write-Output "Scheduled task installed: $TaskName"

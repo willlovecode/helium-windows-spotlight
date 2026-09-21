@@ -29,7 +29,7 @@ for ($attempt = 1; $attempt -le $attemptCount; $attempt++) {
         if ($sourcePath) {
             break
         }
-        $lastError = 'Windows liefert noch kein gültiges Spotlight-Bild.'
+        $lastError = 'Windows has not exposed a valid Spotlight image yet.'
     } catch {
         $lastError = $_.Exception.Message
     }
@@ -40,12 +40,12 @@ for ($attempt = 1; $attempt -le $attemptCount; $attempt++) {
 }
 
 if (-not $sourcePath) {
-    throw "Kein aktuelles Windows-Spotlight-Bild gefunden. $lastError"
+    throw "No current Windows Spotlight image found. $lastError"
 }
 
 if ($DryRun) {
-    Write-Output "Spotlight-Quelle: $sourcePath"
-    Write-Output "Ziel: $destinationPath"
+    Write-Output "Spotlight source: $sourcePath"
+    Write-Output "Destination: $destinationPath"
     exit 0
 }
 
@@ -59,8 +59,8 @@ try {
     }
 
     Move-Item -LiteralPath $temporaryPath -Destination $destinationPath -Force
-    Write-Output "Spotlight synchronisiert: $destinationPath"
-    Write-Output "Quelle: $sourcePath"
+    Write-Output "Spotlight synchronized: $destinationPath"
+    Write-Output "Source: $sourcePath"
 } finally {
     if (Test-Path -LiteralPath $temporaryPath) {
         Remove-Item -LiteralPath $temporaryPath -Force -ErrorAction SilentlyContinue
